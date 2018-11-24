@@ -3539,7 +3539,7 @@ By using 'Popcorn Time' or accessing this site you affirm that you are either mo
         <image name="Download Progress Pause" width="60" height="60"/>
         <image name="Episode Placeholder" width="600" height="600"/>
         <image name="Episode Watched Indicator" width="308" height="174"/>
-        <image name="Icon" width="144" height="144"/>
+        <image name="Icon" width="600" height="600"/>
         <image name="Movie Placeholder" width="400" height="600"/>
         <image name="Now Playing Info" width="251" height="85"/>
         <image name="Other Placeholder" width="820" height="460"/>
