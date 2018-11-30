@@ -14,6 +14,7 @@ open class SubtitlesManager: NetworkManager {
      - Parameter episode:       The show episode.
      - Parameter imdbId:        The Imdb identification code of the episode or movie.
      - Parameter limit:         The limit of subtitles to fetch as a `String`. Defaults to 500.
+     - Parameter videoFilePath: The path of the video for subtitle retrieval `URL`. Defaults to nil.
      
      - Parameter completion:    Completion handler called with array of subtitles and an optional error.
      */
@@ -52,6 +53,16 @@ open class SubtitlesManager: NetworkManager {
         }
     }
     
+    /**
+     Load subtitles from API. Use episode or ImdbId not both. Using ImdbId rewards better results.
+     
+     - Parameter episode:       The show episode.
+     - Parameter imdbId:        The Imdb identification code of the episode or movie.
+     - Parameter limit:         The limit of subtitles to fetch as a `String`. Defaults to 500.
+     - Parameter videoFilePath: The path of the video for subtitle retrieval `URL`. Defaults to nil.
+     
+     - Parameter completion:    Completion handler called with array of subtitles and an optional error.
+     */
     open func getAllSubtitles(_ episode: Episode? = nil, imdbId: String? = nil,preferredLang: String? = nil,videoFilePath: URL? = nil, limit: String = "500", completion:@escaping (Dictionary<String, [Subtitle]>, NSError?) -> Void) {
         let params = getParams(episode, imdbId: imdbId, preferredLang: preferredLang, videoFilePath: videoFilePath, limit: limit)
         

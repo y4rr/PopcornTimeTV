@@ -25,16 +25,6 @@ class SubtitlesViewController: OptionsStackViewController,SubtitlesViewControlle
     }
     
     private var subtitlesInView:[Subtitle] = Array()
-    
-    // MARK: Long press gesture set up
-    
-    override func viewDidLoad() {
-        if allSubtitles.count > 0 {
-            subtitlesInView += [currentSubtitle ?? allSubtitles["English"]!.first!,Subtitle(name: "", language: "Select Other", link: "", ISO639: "", rating: 0.0)]
-            subtitlesInView = (SubtitleSettings.shared.subtitlesSelectedForVideo as! [Subtitle])
-        }
-        super.viewDidLoad()
-    }
 
     // MARK: Table view data source
     
@@ -149,8 +139,33 @@ class SubtitlesViewController: OptionsStackViewController,SubtitlesViewControlle
     
     func didSelectSubtitle(_ subtitle: Subtitle?) {
         self.currentSubtitle = subtitle
-        subtitlesInView.insert(subtitle!, at: 0)
-        SubtitleSettings.shared.subtitlesSelectedForVideo.append(subtitle! as Any)
+
+        for i in 0..<SubtitleSettings.shared.subtitlesSelectedForVideo.count{
+            if let savedSubtitle = SubtitleSettings.shared.subtitlesSelectedForVideo[i] as? Subtitle{
+                if savedSubtitle.language == subtitle?.language{
+                    SubtitleSettings.shared.subtitlesSelectedForVideo.replaceSubrange(i...i, with: [subtitle as Any])
+                    break
+                }
+            }
+        }
+        if subtitle != nil && !subtitlesInView.contains(subtitle!){
+            for savedSubtitle in subtitlesInView{
+                if subtitle!.language == savedSubtitle.language{
+                    let index = subtitlesInView.firstIndex(of: savedSubtitle)!
+                    subtitlesInView.replaceSubrange(index...index, with: [subtitle!])
+                    break
+                }
+                if savedSubtitle == subtitlesInView.last{
+                    subtitlesInView.insert(subtitle!, at: 0)
+                    SubtitleSettings.shared.subtitlesSelectedForVideo.append(subtitle! as Any)
+                }
+            }
+        }else{
+            subtitlesInView.insert(subtitle!, at: 0)
+            SubtitleSettings.shared.subtitlesSelectedForVideo.append(subtitle! as Any)
+        }
+        
+        
         delegate?.didSelectSubtitle(subtitle)
     }
 }

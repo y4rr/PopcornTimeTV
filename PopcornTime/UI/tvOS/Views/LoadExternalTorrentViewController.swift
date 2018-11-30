@@ -58,7 +58,9 @@ class LoadExternalTorrentViewController:UIViewController,GCDWebServerDelegate,PC
                                 selected = torrents.distance(from: torrents.startIndex, to: torrents.index(of: torrent)!)
                             }))
                         }
-                        loadingViewController.present(torrentSelection, animated: true)
+                        DispatchQueue.main.sync {
+                            loadingViewController.present(torrentSelection, animated: true)
+                        }
                         while selected == -1{ }
                         return Int32(selected)
                     }

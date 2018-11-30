@@ -13,7 +13,7 @@ class ExtendedSubtitleTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // Always 2 sections, the selection section and the subtitles section
+        // Always 1 section, the subtitles section
         return 1
     }
     
@@ -47,15 +47,4 @@ class ExtendedSubtitleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Available Subtitles".localized
     }
-    
-    // MARK: - Navigation
-    
-    /*
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

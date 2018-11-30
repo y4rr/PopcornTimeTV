@@ -85,7 +85,8 @@ class OptionsTableViewController: UITableViewController {
             cell.textLabel?.text = (currentSubtitleDelay > 0 ? "+" : "") + NumberFormatter.localizedString(from: NSNumber(value: currentSubtitleDelay), number: .decimal)
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = Array(allSubtitles.keys)[indexPath.row]
+            let orderedSubtitles = allSubtitles.keys.sorted()
+            cell.textLabel?.text = orderedSubtitles[indexPath.row]
             if let currentSubtitle = currentSubtitle, currentSubtitle.link == Array(allSubtitles[cell.textLabel!.text!]!).first!.link {
                 cell.accessoryType = .detailButton
                 cell.imageView?.image = "✔️".image()

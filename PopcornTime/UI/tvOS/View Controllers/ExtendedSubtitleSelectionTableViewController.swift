@@ -58,12 +58,10 @@ class ExtendedSubtitleSelectionTableViewController: UITableViewController {
         if indexPath.section == 0 {
             let alertController = UIAlertController(title: "Select Language".localized, message: nil, preferredStyle: .actionSheet)
             
-            var allLanguages = Array(allSubtitles.keys)
-            allLanguages.sort()
+            let allLanguages = Array(allSubtitles.keys).sorted()
             for (language) in allLanguages{
                         let action = UIAlertAction(title: language, style: .default) { _ in
-                            // subtitles api needs to be updated for this to work
-                            self.currentSubtitle = alternateSubtiles.first
+                            self.currentSubtitle = self.allSubtitles[language]?.first
                             cell?.detailTextLabel?.text = language
                             tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .fade)
                             self.delegate?.didSelectSubtitle(self.currentSubtitle)
@@ -72,11 +70,11 @@ class ExtendedSubtitleSelectionTableViewController: UITableViewController {
             }
             alertController.show(animated: true)
         }else{
-            delegate?.didSelectSubtitle(currentSubtitle)
             self.currentSubtitle = Array(allSubtitles[currentSubtitle!.language]!)[indexPath.row]
             previousCell?.accessoryType = .none
             cell?.accessoryType = .checkmark
             previousCell = cell
+            delegate?.didSelectSubtitle(currentSubtitle)
         }
     }
 
