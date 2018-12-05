@@ -3518,22 +3518,6 @@ By using 'Popcorn Time' or accessing this site you affirm that you are either mo
             </objects>
             <point key="canvasLocation" x="5451" y="4555"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="s0v-PN-dW4">
-            <objects>
-                <viewController id="Ape-TT-27p" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cxS-CG-iQZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="haf-cU-7Sq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QmJ-rd-eDc">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dvk-Jf-fxB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <resources>
         <image name="Download Progress Pause" width="60" height="60"/>

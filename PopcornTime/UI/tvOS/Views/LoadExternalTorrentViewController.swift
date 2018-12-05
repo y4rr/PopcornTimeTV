@@ -55,7 +55,7 @@ class LoadExternalTorrentViewController:UIViewController,GCDWebServerDelegate,PC
                         let torrentSelection = UIAlertController(title: "Select file to play", message: nil, preferredStyle: .actionSheet)
                         for torrent in torrents{
                             torrentSelection.addAction(UIAlertAction(title: torrent, style: .default, handler: { _ in
-                                selected = torrents.distance(from: torrents.startIndex, to: torrents.index(of: torrent)!)
+                                selected = torrents.firstIndex(of: torrent) ?? -1
                             }))
                         }
                         DispatchQueue.main.sync {
