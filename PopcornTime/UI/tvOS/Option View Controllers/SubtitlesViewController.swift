@@ -142,30 +142,33 @@ class SubtitlesViewController: OptionsStackViewController,SubtitlesViewControlle
 
         for i in 0..<SubtitleSettings.shared.subtitlesSelectedForVideo.count{
             if let savedSubtitle = SubtitleSettings.shared.subtitlesSelectedForVideo[i] as? Subtitle{
-                if savedSubtitle.language == subtitle?.language{
-                    SubtitleSettings.shared.subtitlesSelectedForVideo.replaceSubrange(i...i, with: [subtitle as Any])
-                    break
+                if savedSubtitle.language == subtitle?.language{// do we have a sub with the same language in permanent storage
+                    SubtitleSettings.shared.subtitlesSelectedForVideo.replaceSubrange(i...i, with: [subtitle as Any])//replace the one we have with the latest one
+                    let index = subtitlesInView.firstIndex(of: savedSubtitle)!
+                    subtitlesInView[index] = subtitle!
+                    delegate?.didSelectSubtitle(subtitle)
+                    return
                 }
             }
         }
-        if subtitle != nil && !subtitlesInView.contains(subtitle!){
+        if !subtitlesInView.contains(subtitle!){// does the subtitlesinview already have our sub if no enter
             for savedSubtitle in subtitlesInView{
-                if subtitle!.language == savedSubtitle.language{
+                if subtitle!.language == savedSubtitle.language{// do we have a sub with the same language
                     let index = subtitlesInView.firstIndex(of: savedSubtitle)!
-                    subtitlesInView.replaceSubrange(index...index, with: [subtitle!])
+                    subtitlesInView[index] = subtitle!//switch out the one with the same language with our latest one
+                    SubtitleSettings.shared.subtitlesSelectedForVideo.append(subtitle! as Any)//add it to our permanent list
                     break
                 }
-                if savedSubtitle == subtitlesInView.last{
-                    subtitlesInView.insert(subtitle!, at: 0)
+                if savedSubtitle == subtitlesInView.last{//if we do not have a sub with the same language
+                    subtitlesInView.insert(subtitle!, at: 0) //add the latest selected
                     SubtitleSettings.shared.subtitlesSelectedForVideo.append(subtitle! as Any)
                 }
             }
-        }else{
-            subtitlesInView.insert(subtitle!, at: 0)
+        }else{// we have the sub in the subtitlesinview but not in permanent storage
             SubtitleSettings.shared.subtitlesSelectedForVideo.append(subtitle! as Any)
         }
         
         
-        delegate?.didSelectSubtitle(subtitle)
+        delegate?.didSelectSubtitle(subtitle)//notify the pctplayerviewcontroller
     }
 }
