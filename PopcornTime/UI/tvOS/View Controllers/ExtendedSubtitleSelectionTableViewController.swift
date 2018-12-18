@@ -11,7 +11,7 @@ import struct PopcornKit.Subtitle
 
 class ExtendedSubtitleSelectionTableViewController: UITableViewController {
 
-    var allSubtitles = Dictionary<String, [Subtitle]>()
+    var subtitles = Dictionary<String, [Subtitle]>()
     var currentSubtitle:Subtitle?
     var delegate:SubtitlesViewControllerDelegate?
     
@@ -32,7 +32,7 @@ class ExtendedSubtitleSelectionTableViewController: UITableViewController {
         if section == 0 {
             return 1
         }else{
-            return currentSubtitle != nil ? Array(allSubtitles[currentSubtitle!.language]!).count : 0
+            return currentSubtitle != nil ? Array(subtitles[currentSubtitle!.language]!).count : 0
         }
     }
 
@@ -44,7 +44,7 @@ class ExtendedSubtitleSelectionTableViewController: UITableViewController {
             cell.detailTextLabel?.text = currentSubtitle?.language ?? "None".localized
         }else{
             cell = tableView.dequeueReusableCell(withIdentifier: "SubCell")!
-            let subtitle = Array(allSubtitles[currentSubtitle?.language ?? "English"]!)[indexPath.row]
+            let subtitle = Array(subtitles[currentSubtitle?.language ?? "English"]!)[indexPath.row]
             cell.detailTextLabel?.text = subtitle.language
             cell.textLabel?.text = subtitle.name
             cell.accessoryType = currentSubtitle?.name == subtitle.name ? .checkmark : .none
@@ -58,10 +58,10 @@ class ExtendedSubtitleSelectionTableViewController: UITableViewController {
         if indexPath.section == 0 {
             let alertController = UIAlertController(title: "Select Language".localized, message: nil, preferredStyle: .actionSheet)
             
-            let allLanguages = Array(allSubtitles.keys).sorted()
+            let allLanguages = Array(subtitles.keys).sorted()
             for (language) in allLanguages{
                         let action = UIAlertAction(title: language, style: .default) { _ in
-                            self.currentSubtitle = self.allSubtitles[language]?.first
+                            self.currentSubtitle = self.subtitles[language]?.first
                             cell?.detailTextLabel?.text = language
                             tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .fade)
                             self.delegate?.didSelectSubtitle(self.currentSubtitle)
@@ -71,7 +71,7 @@ class ExtendedSubtitleSelectionTableViewController: UITableViewController {
             alertController.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
             alertController.show(animated: true)
         }else{
-            self.currentSubtitle = Array(allSubtitles[currentSubtitle!.language]!)[indexPath.row]
+            self.currentSubtitle = Array(subtitles[currentSubtitle!.language]!)[indexPath.row]
             previousCell?.accessoryType = .none
             cell?.accessoryType = .checkmark
             previousCell = cell

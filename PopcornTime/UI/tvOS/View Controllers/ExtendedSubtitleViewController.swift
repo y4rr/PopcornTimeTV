@@ -11,7 +11,7 @@ import struct PopcornKit.Subtitle
 
 class ExtendedSubtitleViewController: UIViewController {
     
-    var allSubtitles = Dictionary<String, [Subtitle]>()
+    var subtitles = Dictionary<String, [Subtitle]>()
     var currentSubtitle:Subtitle?
     var delegate:SubtitlesViewControllerDelegate?
     
@@ -21,7 +21,7 @@ class ExtendedSubtitleViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "showExtendedTableView"{
             if let destination = segue.destination as? ExtendedSubtitleSelectionTableViewController{
-                destination.allSubtitles = self.allSubtitles
+                destination.subtitles = self.subtitles
                 destination.currentSubtitle = self.currentSubtitle
                 destination.delegate = self.delegate
             }

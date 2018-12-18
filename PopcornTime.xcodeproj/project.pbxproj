@@ -2914,6 +2914,7 @@
 				DEVELOPMENT_TEAM = "";
 				EXPANDED_CODE_SIGN_IDENTITY = "-";
 				EXPANDED_CODE_SIGN_IDENTITY_NAME = "-";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/PopcornTime/Supporting Files/tvOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.popcorntimetv.popcorntime.tvos;
@@ -3128,6 +3129,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.2;
 				TVOS_DEPLOYMENT_TARGET = 10.2;
+				VALID_ARCHS = $ARCHS_STANDARD;
 			};
 			name = Debug;
 		};
@@ -3154,6 +3156,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TVOS_DEPLOYMENT_TARGET = 10.2;
+				VALID_ARCHS = $ARCHS_STANDARD;
 			};
 			name = Release;
 		};

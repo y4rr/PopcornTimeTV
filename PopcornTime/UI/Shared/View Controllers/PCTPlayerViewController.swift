@@ -195,11 +195,8 @@ class PCTPlayerViewController: UIViewController, VLCMediaPlayerDelegate, UIGestu
     // MARK: - Public vars
     
     weak var delegate: PCTPlayerViewControllerDelegate?
-    var subtitles: [Subtitle] {
+    var subtitles: Dictionary<String, [Subtitle]> {
         return media.subtitles
-    }
-    var allSubtitles: Dictionary<String, [Subtitle]> {
-        return media.allSubtitles
     }
     var currentSubtitle: Subtitle? {
         didSet {
@@ -325,8 +322,9 @@ class PCTPlayerViewController: UIViewController, VLCMediaPlayerDelegate, UIGestu
         
         let settings = SubtitleSettings.shared
         media.getSubtitles(orWithFilePath: self.localPathToMedia){ subtitles in
+            self.media.subtitles = subtitles
             if let preferredLanguage = settings.language {
-                self.currentSubtitle = subtitles.first(where: {$0.language == preferredLanguage})
+                self.currentSubtitle = subtitles[preferredLanguage]?.first
             }
         }
         (mediaplayer as VLCFontAppearance).setTextRendererFontSize!(NSNumber(value: settings.size.rawValue))
@@ -548,7 +546,7 @@ class PCTPlayerViewController: UIViewController, VLCMediaPlayerDelegate, UIGestu
             if segue.identifier == "showSubtitles",
                 let navigationController = segue.destination as? UINavigationController,
                 let vc = navigationController.viewControllers.first as? OptionsTableViewController {
-                vc.allSubtitles = allSubtitles
+                vc.subtitles = subtitles
                 vc.currentSubtitle = currentSubtitle
                 vc.currentSubtitleDelay = mediaplayer.currentVideoSubTitleDelay/Int(1e6)
                 vc.currentAudioDelay = mediaplayer.currentAudioPlaybackDelay/Int(1e6)

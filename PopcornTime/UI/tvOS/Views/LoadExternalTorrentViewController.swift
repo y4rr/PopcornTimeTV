@@ -23,7 +23,7 @@ class LoadExternalTorrentViewController:UIViewController,GCDWebServerDelegate,PC
                         title = String(title[startIndex.upperBound...])
                         title = String(title[title.startIndex ... title.range(of: "&tr")!.lowerBound])
                     }
-                    let magnetTorrentMedia = Movie.init(title: title, id: "34", tmdbId: nil, slug: "magnet-link", summary: "", torrents: [userTorrent], subtitles: [], largeBackgroundImage: nil, largeCoverImage: nil)
+                    let magnetTorrentMedia = Movie.init(title: title, id: "34", tmdbId: nil, slug: "magnet-link", summary: "", torrents: [userTorrent], subtitles: [:], largeBackgroundImage: nil, largeCoverImage: nil)
                     
                     let storyboard = UIStoryboard.main
                     let loadingViewController = storyboard.instantiateViewController(withIdentifier: "PreloadTorrentViewController") as! PreloadTorrentViewController
@@ -58,9 +58,8 @@ class LoadExternalTorrentViewController:UIViewController,GCDWebServerDelegate,PC
                                 selected = torrents.firstIndex(of: torrent) ?? -1
                             }))
                         }
-                        DispatchQueue.main.sync {
-                            loadingViewController.present(torrentSelection, animated: true)
-                        }
+                        loadingViewController.present(torrentSelection, animated: true)
+                        
                         while selected == -1{ }
                         return Int32(selected)
                     }

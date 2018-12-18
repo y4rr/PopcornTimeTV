@@ -15,7 +15,7 @@ class OptionsTableViewController: UITableViewController {
     
     weak var delegate: OptionsViewControllerDelegate?
     
-    var allSubtitles = Dictionary<String, [Subtitle]>()
+    var subtitles = Dictionary<String, [Subtitle]>()
     
     var currentSubtitle: Subtitle?
     var currentSubtitleDelay = 0
@@ -33,7 +33,7 @@ class OptionsTableViewController: UITableViewController {
         {
             currentSubtitle = nil
         } else {
-            currentSubtitle = Array(allSubtitles[cell.textLabel?.text ?? "English"]!).first
+            currentSubtitle = Array(subtitles[cell.textLabel?.text ?? "English"]!).first
         }
        
         delegate?.didSelectSubtitle(currentSubtitle)
@@ -63,7 +63,7 @@ class OptionsTableViewController: UITableViewController {
         case 1:
             return 1
         case 2:
-            return allSubtitles.keys.count
+            return subtitles.keys.count
         default:
             return 0
         }
@@ -85,9 +85,9 @@ class OptionsTableViewController: UITableViewController {
             cell.textLabel?.text = (currentSubtitleDelay > 0 ? "+" : "") + NumberFormatter.localizedString(from: NSNumber(value: currentSubtitleDelay), number: .decimal)
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            let orderedSubtitles = allSubtitles.keys.sorted()
+            let orderedSubtitles = subtitles.keys.sorted()
             cell.textLabel?.text = orderedSubtitles[indexPath.row]
-            if let currentSubtitle = currentSubtitle, currentSubtitle.link == Array(allSubtitles[cell.textLabel!.text!]!).first!.link {
+            if let currentSubtitle = currentSubtitle, currentSubtitle.link == Array(subtitles[cell.textLabel!.text!]!).first!.link {
                 cell.accessoryType = .detailButton
                 cell.imageView?.image = "✔️".image()
             } else {
@@ -104,7 +104,7 @@ class OptionsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showExtendedSubtitles"{
             if let destination = segue.destination as? ExtendedSubtitleTableViewController{
-                destination.allSubtitles = allSubtitles
+                destination.subtitles = subtitles
                 destination.currentSubtitle = currentSubtitle
                 destination.delegate = delegate
             }

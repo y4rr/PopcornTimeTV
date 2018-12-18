@@ -127,23 +127,18 @@ extension AppDelegate: PCTPlayerViewControllerDelegate, UIViewControllerTransiti
             guard self.window?.rootViewController?.presentedViewController === loadingViewController else { return } // Make sure the user is still loading.
             
             media.subtitles = subtitles
-            media.getAllSubtitles() { [unowned self] allSubtitles in
-                media.allSubtitles = allSubtitles
+            #if os(iOS)
                 
-                #if os(iOS)
-                
-                if GCKCastContext.sharedInstance().castState == .connected {
-                    let playViewController = storyboard.instantiateViewController(withIdentifier: "CastPlayerViewController") as! CastPlayerViewController
-                    media.playOnChromecast(fromFileOrMagnetLink: torrent.url, loadingViewController: loadingViewController, playViewController: playViewController, progress: currentProgress, errorBlock: error, finishedLoadingBlock: finishedLoading)
-                    return
-                }
-                
-                #endif
-                
-                let playViewController = storyboard.instantiateViewController(withIdentifier: "PCTPlayerViewController") as! PCTPlayerViewController
-                playViewController.delegate = self
-                media.play(fromFileOrMagnetLink: torrent.url, nextEpisodeInSeries: nextEpisode, loadingViewController: loadingViewController, playViewController: playViewController, progress: currentProgress, errorBlock: error, finishedLoadingBlock: finishedLoading, selectingTorrentBlock: media.title == "Unknown" ? selectTorrent : nil)
+            if GCKCastContext.sharedInstance().castState == .connected {
+                let playViewController = storyboard.instantiateViewController(withIdentifier: "CastPlayerViewController") as! CastPlayerViewController
+                media.playOnChromecast(fromFileOrMagnetLink: torrent.url, loadingViewController: loadingViewController, playViewController: playViewController, progress: currentProgress, errorBlock: error, finishedLoadingBlock: finishedLoading)
+                return
             }
+            #endif
+                
+            let playViewController = storyboard.instantiateViewController(withIdentifier: "PCTPlayerViewController") as! PCTPlayerViewController
+            playViewController.delegate = self
+            media.play(fromFileOrMagnetLink: torrent.url, nextEpisodeInSeries: nextEpisode, loadingViewController: loadingViewController, playViewController: playViewController, progress: currentProgress, errorBlock: error, finishedLoadingBlock: finishedLoading, selectingTorrentBlock: media.title == "Unknown" ? selectTorrent : nil)
         }
     }
     

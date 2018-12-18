@@ -69,10 +69,7 @@ public struct Episode: Media, Equatable {
     public var torrents = [Torrent]()
     
     /// The subtitles associated with the episode. Empty by default. Must be filled by calling `search:episode:imdbId:limit:completion:` on `SubtitlesManager`.
-    public var subtitles = [Subtitle]()
-    
-    /// The subtitles associated with the movie. Empty by default. Must be filled by calling `getAllSubtitles:episode:imdbId:limit:completion:` on `SubtitlesManager`.
-    public var allSubtitles = Dictionary<String, [Subtitle]>()
+    public var subtitles = Dictionary<String, [Subtitle]>()
     
     public init?(map: Map) {
         do { self = try Episode(map) }
@@ -108,7 +105,7 @@ public struct Episode: Media, Equatable {
         self.largeBackgroundImage = try? map.value("images.fanart")
     }
     
-    public init(title: String = NSLocalizedString("Unknown", comment: ""), id: String = "0000000", tmdbId: Int? = nil, slug: String = "unknown", summary: String = "No summary available.".localized, torrents: [Torrent] = [], subtitles: [Subtitle] = [], largeBackgroundImage: String? = nil, largeCoverImage: String? = nil, show: Show? = nil, episode: Int = -1, season: Int = -1) {
+    public init(title: String = NSLocalizedString("Unknown", comment: ""), id: String = "0000000", tmdbId: Int? = nil, slug: String = "unknown", summary: String = "No summary available.".localized, torrents: [Torrent] = [], subtitles: Dictionary<String, [Subtitle]> = [:], largeBackgroundImage: String? = nil, largeCoverImage: String? = nil, show: Show? = nil, episode: Int = -1, season: Int = -1) {
         self.title = title
         self.id = id
         self.tmdbId = tmdbId

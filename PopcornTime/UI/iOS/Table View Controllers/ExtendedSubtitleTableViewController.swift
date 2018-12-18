@@ -4,7 +4,7 @@ import struct PopcornKit.Subtitle
 
 class ExtendedSubtitleTableViewController: UITableViewController {
     
-    var allSubtitles = Dictionary<String, [Subtitle]>()
+    var subtitles = Dictionary<String, [Subtitle]>()
     var currentSubtitle:Subtitle?
     var delegate:OptionsViewControllerDelegate?
     
@@ -18,7 +18,7 @@ class ExtendedSubtitleTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentSubtitle != nil ? Array(allSubtitles[currentSubtitle!.language]!).count : 0
+        return currentSubtitle != nil ? Array(subtitles[currentSubtitle!.language]!).count : 0
     }
     
     
@@ -26,7 +26,7 @@ class ExtendedSubtitleTableViewController: UITableViewController {
         var cell:UITableViewCell
         
         cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        let subtitle = Array(allSubtitles[currentSubtitle?.language ?? "English".localized]!)[indexPath.row]
+        let subtitle = Array(subtitles[currentSubtitle?.language ?? "English".localized]!)[indexPath.row]
         cell.detailTextLabel?.text = subtitle.language
         cell.textLabel?.text = subtitle.name
         cell.accessoryType = currentSubtitle?.name == subtitle.name ? .checkmark : .none
@@ -37,7 +37,7 @@ class ExtendedSubtitleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         delegate?.didSelectSubtitle(currentSubtitle)
-        self.currentSubtitle = Array(allSubtitles[currentSubtitle!.language]!)[indexPath.row]
+        self.currentSubtitle = Array(subtitles[currentSubtitle!.language]!)[indexPath.row]
         previousCell?.accessoryType = .none
         cell?.accessoryType = .checkmark
         previousCell = cell
