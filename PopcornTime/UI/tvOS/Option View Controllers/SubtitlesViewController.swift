@@ -25,7 +25,7 @@ class SubtitlesViewController: OptionsStackViewController,SubtitlesViewControlle
     }
     
     private var subtitlesInView:[Subtitle] = Array()
-
+    
     // MARK: Table view data source
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

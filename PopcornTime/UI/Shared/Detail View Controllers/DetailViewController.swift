@@ -25,6 +25,7 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
     
     #elseif os(tvOS)
     
+    var availableSubtitlesLanguage: [String] = []
     var seasonsLabel: UILabel {
         get {
             return itemViewController.titleLabel
@@ -124,8 +125,8 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
         super.viewDidLoad()
         
         #if os(tvOS)
-            
             let focusButtonsGuide = UIFocusGuide()
+        
             view.addLayoutGuide(focusButtonsGuide)
             
             focusButtonsGuide.topAnchor.constraint(equalTo: itemViewController.view.bottomAnchor).isActive = true
@@ -139,6 +140,7 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
         
         navigationItem.title = currentItem.title
         titleLabel?.text = currentItem.title
+        self.getAvailableSubtitles()
         
         if let image = currentItem.largeBackgroundImage, let url = URL(string: image) {
             backgroundImageView.af_setImage(withURL: url) { [weak self] response in
@@ -178,6 +180,28 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
             episodesContainerViewHeightConstraint.constant = 0
         } else if let show = currentItem as? Show {
             TMDBManager.shared.getLogo(forMediaOfType: .shows, id: show.tvdbId, completion: completion)
+        }
+    }
+    
+    func getAvailableSubtitles() {
+        currentItem.getSubtitles { (subtitles) in
+            var allSubsArray: [[Subtitle]] = []
+            var subsArray: [String] = []
+            
+            for subs in subtitles {
+                let subsArray = subs.value
+                allSubsArray.append(subsArray)
+            }
+            
+            for sbs in allSubsArray {
+                sbs.forEach { (sub) in
+                    subsArray.append(sub.language)
+                }
+            }
+            
+            subsArray = subsArray.removeDuplicates()
+            subsArray = subsArray.sorted { $1 > $0 }
+            self.availableSubtitlesLanguage = subsArray
         }
     }
     
@@ -260,5 +284,19 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
         } else if vc == accessibilityDescriptionCollectionViewController {
             accessibilityContainerViewHeightConstraint.constant = height
         }
+    }
+}
+
+extension Array where Element:Equatable {
+    func removeDuplicates() -> [Element] {
+        var result = [Element]()
+
+        for value in self {
+            if result.contains(value) == false {
+                result.append(value)
+            }
+        }
+
+        return result
     }
 }
