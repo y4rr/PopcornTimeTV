@@ -78,7 +78,7 @@ class MovieDetailViewController: DetailViewController {
                formatter.allowedUnits = [.hour, .minute]
                
                
-                vc.dataSource = [("Genre".localized, self.movie.genres.first?.localizedCapitalized.localized ?? "Unknown".localized), ("Released".localized, self.movie.year), ("Run Time".localized, formatter.string(from: TimeInterval(self.movie.runtime) * 60) ?? "0 min"), ("Rating".localized, self.movie.certification), ("Subtitles", subtitlesString)]
+                vc.dataSource = [("Genre".localized, self.movie.genres.first?.localizedCapitalized.localized ?? "Unknown".localized), ("Released".localized, self.movie.year), ("Run Time".localized, formatter.string(from: TimeInterval(self.movie.runtime) * 60) ?? "0 min"), ("Rating".localized, self.movie.certification), ("Subtitles".localized, subtitlesString)]
                
                 self.informationDescriptionCollectionViewController = vc
             }

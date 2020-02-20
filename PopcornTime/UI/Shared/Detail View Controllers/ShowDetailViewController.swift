@@ -94,7 +94,7 @@ class ShowDetailViewController: DetailViewController {
                 
                 vc.headerTitle = "Information".localized
                 
-                vc.dataSource = [("Genre".localized, self.show.genres.first?.localizedCapitalized.localized ?? "Unknown".localized), ("Released".localized, self.show.year), ("Run Time".localized, "\(self.show.runtime ?? 0) min"), ("Network".localized, self.show.network ?? "TV"), ("Subtitles", subtitlesString)]
+                vc.dataSource = [("Genre".localized, self.show.genres.first?.localizedCapitalized.localized ?? "Unknown".localized), ("Released".localized, self.show.year), ("Run Time".localized, "\(self.show.runtime ?? 0) min"), ("Network".localized, self.show.network ?? "TV"), ("Subtitles".localized, subtitlesString)]
                 
                 self.informationDescriptionCollectionViewController = vc
             }
