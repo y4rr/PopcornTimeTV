@@ -7,7 +7,6 @@ import PopcornKit
 
 class DetailViewController: UIViewController, CollectionViewControllerDelegate, UIScrollViewDelegate {
     
-    
     #if os(iOS)
 
     @IBOutlet var castButton: CastIconButton?
@@ -25,7 +24,6 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
     
     #elseif os(tvOS)
     
-    var availableSubtitlesLanguage: [String] = []
     var seasonsLabel: UILabel {
         get {
             return itemViewController.titleLabel
@@ -140,7 +138,6 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
         
         navigationItem.title = currentItem.title
         titleLabel?.text = currentItem.title
-        self.getAvailableSubtitles()
         
         if let image = currentItem.largeBackgroundImage, let url = URL(string: image) {
             backgroundImageView.af_setImage(withURL: url) { [weak self] response in
@@ -183,28 +180,6 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
         }
     }
     
-    func getAvailableSubtitles() {
-        currentItem.getSubtitles { (subtitles) in
-            var allSubsArray: [[Subtitle]] = []
-            var subsArray: [String] = []
-            
-            for subs in subtitles {
-                let subsArray = subs.value
-                allSubsArray.append(subsArray)
-            }
-            
-            for sbs in allSubsArray {
-                sbs.forEach { (sub) in
-                    subsArray.append(sub.language)
-                }
-            }
-            
-            subsArray = subsArray.removeDuplicates()
-            subsArray = subsArray.sorted { $1 > $0 }
-            self.availableSubtitlesLanguage = subsArray
-        }
-    }
-    
     func loadMedia(id: String, completion: @escaping (Media?, NSError?) -> Void) { }
     
     // MARK: - Collection view controller delegate
@@ -238,7 +213,7 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
             
             let key = UIImage(named: "SDH")!.colored(isDark ? .white : .black)!.attributed
             let value = "Subtitles for the deaf and Hard of Hearing (SDH) refer to subtitles in the original language with the addition of relevant non-dialog information.".localized
-            
+                        
             vc.dataSource = [(key, value)]
             
             accessibilityDescriptionCollectionViewController = vc

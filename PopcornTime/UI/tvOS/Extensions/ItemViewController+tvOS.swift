@@ -104,7 +104,7 @@ extension ItemViewController: UIViewControllerTransitioningDelegate {
             if movie.trailerCode == nil {
                 trailerButton.removeFromSuperview()
             }
-            
+                        
             seasonsButton?.removeFromSuperview()
         } else if let show = media as? Show {
             titleLabel.text = ""

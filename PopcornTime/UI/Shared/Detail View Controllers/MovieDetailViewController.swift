@@ -44,15 +44,44 @@ class MovieDetailViewController: DetailViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? DescriptionCollectionViewController, segue.identifier == "embedInformation" {
-            vc.headerTitle = "Information".localized
-            
-            let formatter = DateComponentsFormatter()
-            formatter.unitsStyle = .short
-            formatter.allowedUnits = [.hour, .minute]
-            
-            vc.dataSource = [("Genre".localized, movie.genres.first?.localizedCapitalized.localized ?? "Unknown".localized), ("Released".localized, movie.year), ("Run Time".localized, formatter.string(from: TimeInterval(movie.runtime) * 60) ?? "0 min"), ("Rating".localized, movie.certification)]
-            
-            informationDescriptionCollectionViewController = vc
+            currentItem.getSubtitles { (subtitles) in
+                var allSubsArray: [[Subtitle]] = []
+                var subsArray: [String] = []
+                var subtitlesString = ""
+                
+                for subs in subtitles {
+                    let subsArray = subs.value
+                    allSubsArray.append(subsArray)
+                }
+                
+                for sbs in allSubsArray {
+                    sbs.forEach { (sub) in
+                        subsArray.append(sub.language)
+                    }
+                }
+                
+                subsArray = subsArray.removeDuplicates()
+                subsArray = subsArray.sorted { $1 > $0 }
+                                
+                for (key, s) in subsArray.enumerated() {
+                    guard key != subsArray.endIndex - 1 else {
+                        subtitlesString.append(s)
+                        return
+                    }
+                    subtitlesString.append("\(s), ")
+                }
+                
+                vc.headerTitle = "Information".localized
+                           
+               let formatter = DateComponentsFormatter()
+               formatter.unitsStyle = .short
+               formatter.allowedUnits = [.hour, .minute]
+               
+               
+                vc.dataSource = [("Genre".localized, self.movie.genres.first?.localizedCapitalized.localized ?? "Unknown".localized), ("Released".localized, self.movie.year), ("Run Time".localized, formatter.string(from: TimeInterval(self.movie.runtime) * 60) ?? "0 min"), ("Rating".localized, self.movie.certification), ("Subtitles", subtitlesString)]
+               
+                self.informationDescriptionCollectionViewController = vc
+            }
         } else if let vc = segue.destination as? CollectionViewController {
             
             if segue.identifier == "embedRelated" {

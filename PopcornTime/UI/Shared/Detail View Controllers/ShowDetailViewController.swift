@@ -62,11 +62,42 @@ class ShowDetailViewController: DetailViewController {
             super.prepare(for: segue, sender: sender)
             change(to: currentSeason)
         } else if let vc = segue.destination as? DescriptionCollectionViewController, segue.identifier == "embedInformation" {
-            vc.headerTitle = "Information".localized
-            
-            vc.dataSource = [("Genre".localized, show.genres.first?.localizedCapitalized.localized ?? "Unknown".localized), ("Released".localized, show.year), ("Run Time".localized, "\(show.runtime ?? 0) min"), ("Network".localized, show.network ?? "TV")]
-            
-            informationDescriptionCollectionViewController = vc
+            currentItem.getSubtitles { (subtitles) in
+                var allSubsArray: [[Subtitle]] = []
+                var subsArray: [String] = []
+                var subtitlesString = ""
+                
+                for subs in subtitles {
+                    let subsArray = subs.value
+                    allSubsArray.append(subsArray)
+                }
+                
+                for sbs in allSubsArray {
+                    sbs.forEach { (sub) in
+                        subsArray.append(sub.language)
+                    }
+                }
+                
+                subsArray = subsArray.removeDuplicates()
+                subsArray = subsArray.sorted { $1 > $0 }
+                                
+                for (key, s) in subsArray.enumerated() {
+                    guard key != subsArray.endIndex - 1 else {
+                        subtitlesString.append(s)
+                        return
+                    }
+                    
+                    subtitlesString.append("\(s), ")
+                }
+                
+                print(subtitlesString)
+                
+                vc.headerTitle = "Information".localized
+                
+                vc.dataSource = [("Genre".localized, self.show.genres.first?.localizedCapitalized.localized ?? "Unknown".localized), ("Released".localized, self.show.year), ("Run Time".localized, "\(self.show.runtime ?? 0) min"), ("Network".localized, self.show.network ?? "TV"), ("Subtitles", subtitlesString)]
+                
+                self.informationDescriptionCollectionViewController = vc
+            }
         } else if let vc = segue.destination as? CollectionViewController {
             
             if segue.identifier == "embedRelated" {
