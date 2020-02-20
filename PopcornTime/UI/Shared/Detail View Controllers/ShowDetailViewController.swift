@@ -80,14 +80,13 @@ class ShowDetailViewController: DetailViewController {
                 
                 subsArray = subsArray.removeDuplicates()
                 subsArray = subsArray.sorted { $1 > $0 }
-                                
+                        
                 for (key, s) in subsArray.enumerated() {
-                    guard key != subsArray.endIndex - 1 else {
+                    if key != subsArray.endIndex - 1 {
+                        subtitlesString.append("\(s), ")
+                    } else {
                         subtitlesString.append(s)
-                        return
                     }
-                    
-                    subtitlesString.append("\(s), ")
                 }
                 
                 print(subtitlesString)

@@ -64,24 +64,23 @@ class MovieDetailViewController: DetailViewController {
                 subsArray = subsArray.sorted { $1 > $0 }
                                 
                 for (key, s) in subsArray.enumerated() {
-                    guard key != subsArray.endIndex - 1 else {
+                    if key != subsArray.endIndex - 1 {
+                        subtitlesString.append("\(s), ")
+                    } else {
                         subtitlesString.append(s)
-                        return
                     }
-                    subtitlesString.append("\(s), ")
                 }
                 
                 vc.headerTitle = "Information".localized
-                           
-               let formatter = DateComponentsFormatter()
-               formatter.unitsStyle = .short
-               formatter.allowedUnits = [.hour, .minute]
-               
+                
+                let formatter = DateComponentsFormatter()
+                formatter.unitsStyle = .short
+                formatter.allowedUnits = [.hour, .minute]
                
                 vc.dataSource = [("Genre".localized, self.movie.genres.first?.localizedCapitalized.localized ?? "Unknown".localized), ("Released".localized, self.movie.year), ("Run Time".localized, formatter.string(from: TimeInterval(self.movie.runtime) * 60) ?? "0 min"), ("Rating".localized, self.movie.certification), ("Subtitles".localized, subtitlesString)]
                
                 self.informationDescriptionCollectionViewController = vc
-            }
+             }
         } else if let vc = segue.destination as? CollectionViewController {
             
             if segue.identifier == "embedRelated" {
