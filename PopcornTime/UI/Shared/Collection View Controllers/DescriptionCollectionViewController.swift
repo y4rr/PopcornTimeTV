@@ -56,7 +56,6 @@ class DescriptionCollectionViewController: ResponsiveCollectionViewController, U
         }
         cell.valueLabel.text = data.value
         cell.isDark = isDark
-        
         return cell
     }
     

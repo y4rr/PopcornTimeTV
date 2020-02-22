@@ -7,7 +7,6 @@ import PopcornKit
 
 class DetailViewController: UIViewController, CollectionViewControllerDelegate, UIScrollViewDelegate {
     
-    
     #if os(iOS)
 
     @IBOutlet var castButton: CastIconButton?
@@ -124,8 +123,8 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
         super.viewDidLoad()
         
         #if os(tvOS)
-            
             let focusButtonsGuide = UIFocusGuide()
+        
             view.addLayoutGuide(focusButtonsGuide)
             
             focusButtonsGuide.topAnchor.constraint(equalTo: itemViewController.view.bottomAnchor).isActive = true
@@ -214,7 +213,7 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
             
             let key = UIImage(named: "SDH")!.colored(isDark ? .white : .black)!.attributed
             let value = "Subtitles for the deaf and Hard of Hearing (SDH) refer to subtitles in the original language with the addition of relevant non-dialog information.".localized
-            
+                        
             vc.dataSource = [(key, value)]
             
             accessibilityDescriptionCollectionViewController = vc
@@ -260,5 +259,19 @@ class DetailViewController: UIViewController, CollectionViewControllerDelegate, 
         } else if vc == accessibilityDescriptionCollectionViewController {
             accessibilityContainerViewHeightConstraint.constant = height
         }
+    }
+}
+
+extension Array where Element:Equatable {
+    func removeDuplicates() -> [Element] {
+        var result = [Element]()
+
+        for value in self {
+            if result.contains(value) == false {
+                result.append(value)
+            }
+        }
+
+        return result
     }
 }

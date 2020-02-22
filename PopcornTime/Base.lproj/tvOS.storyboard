@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="15705" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vnN-Md-ybv">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="15400" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vnN-Md-ybv">
     <device id="appleTV" appearance="light"/>
     <dependencies>
         <deployment identifier="tvOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1050,11 +1050,11 @@
                         <viewControllerLayoutGuide type="bottom" id="eFf-jt-oBp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="74d-b2-gZl">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="321"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ky-is-LZ2">
-                                <rect key="frame" x="0.0" y="205" width="1920" height="730"/>
+                                <rect key="frame" x="0.0" y="205" width="1920" height="116"/>
                                 <connections>
                                     <segue destination="9uQ-LP-RR8" kind="embed" identifier="embed" id="qsW-BP-NaD"/>
                                 </connections>
@@ -1194,7 +1194,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Qb-cW-DB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <collectionViewController storyboardIdentifier="CollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9uQ-LP-RR8" customClass="CollectionViewController" customModule="PopcornTime" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" id="GGp-VC-hgJ">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="321"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <gestureRecognizers/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="30" minimumInteritemSpacing="48" id="dAV-Fa-e8x">
@@ -2628,35 +2628,35 @@
                         <viewControllerLayoutGuide type="bottom" id="DvR-hI-Jc6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="azI-A4-1Ul">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="321"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOi-zm-Rjl">
-                                <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="321"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yx5-JC-ZxJ">
-                                <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="321"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vbt-Mc-zjR">
-                                    <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1920" height="321"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogm-Uz-Slq">
-                                            <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1920" height="321"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NGd-2S-BoP">
-                                                <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="1920" height="321"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ohz-Pg-x0J">
-                                                        <rect key="frame" x="928" y="435.5" width="64" height="64"/>
+                                                        <rect key="frame" x="928" y="128.5" width="64" height="64"/>
                                                     </activityIndicatorView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rU-hk-tum">
-                                                        <rect key="frame" x="960" y="425.5" width="0.0" height="0.0"/>
+                                                        <rect key="frame" x="960" y="118.5" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yT7-ti-YNb">
-                                                        <rect key="frame" x="864" y="939" width="192" height="86"/>
+                                                        <rect key="frame" x="864" y="325" width="192" height="86"/>
                                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                                         <state key="normal" title="Button"/>
                                                     </button>
@@ -3664,7 +3664,7 @@ By using 'Popcorn Time' or accessing this site you affirm that you are either mo
     <inferredMetricsTieBreakers>
         <segue reference="r7i-sj-JtW"/>
         <segue reference="frE-FE-cwN"/>
-        <segue reference="KnT-1J-TaD"/>
+        <segue reference="8VK-Ek-nyW"/>
         <segue reference="ocL-5j-FkT"/>
     </inferredMetricsTieBreakers>
 </document>

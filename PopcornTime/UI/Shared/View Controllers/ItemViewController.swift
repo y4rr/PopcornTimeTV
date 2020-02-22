@@ -51,7 +51,7 @@ class ItemViewController: UIViewController, PTTorrentDownloadManagerListener {
     }
     
     var media: Media!
-    
+        
     var watchedButtonImage: UIImage? {
         return media.isWatched ? UIImage(named: "Watched On") : UIImage(named: "Watched Off")
     }

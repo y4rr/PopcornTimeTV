@@ -70,7 +70,7 @@ public struct Episode: Media, Equatable {
     
     /// The subtitles associated with the episode. Empty by default. Must be filled by calling `search:episode:imdbId:limit:completion:` on `SubtitlesManager`.
     public var subtitles = Dictionary<String, [Subtitle]>()
-    
+        
     public init?(map: Map) {
         do { self = try Episode(map) }
         catch { return nil }
